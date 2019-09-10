@@ -1,0 +1,15 @@
+---
+# tasks file for minikube
+- name: download and install minikube
+  apt:
+    deb: https://github.com/kubernetes/minikube/releases/download/v{{version}}/minikube_{{version}}.deb
+- name: add kubernetes repository
+  apt_repository:
+    repo: 'deb https://apt.kubernetes.io/ kubernetes-xenial main'
+    state: present
+    filename: 'kubernetes'
+    update_cache: yes
+- name: install kubectl
+  apt:
+    name: kubectl
+    state: present
